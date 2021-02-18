@@ -4,21 +4,20 @@ import classnames from "classnames";
 import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
-  let dayClass = classnames("day-list__item", {
-    "day-list__item--selected": props.selected,
-    "day-list__item--full": !props.spots,
+  let dayClass = classnames('day-list__item',{
+    'day-list__item--selected': props.selected,
+    'day-list__item--full': (props.spots === 0),
   });
   console.log(dayClass);
 
-  function formatSpots(spots) {
+  function formatSpots(props) {
     if (props.spots === 0) {
       return "no spots remaining";
     }
     if (props.spots === 1) {
       return "1 spot remaining";
-    }
-    if (props.spots === 2) {
-      return "2 spots remaining";
+    } else {
+      return `${props} spots remaining`;
     }
   }
 
