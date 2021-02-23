@@ -6,10 +6,9 @@ import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem"
 import InterviewerList from "components/InterviewList"
-
-import "index.scss";
-
 import Button from "components/Button";
+import Appointment from "components/Appointment";
+import "index.scss";
 
 storiesOf("Button", module)
   .addParameters({
@@ -127,3 +126,10 @@ storiesOf("DayList", module)
           setInterviewer={action("setInterviewer")}
         />
       ));
+
+storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff", default: true }]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time ", () => <Appointment time="12pm"/>)
