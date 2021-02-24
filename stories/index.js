@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem"
-import InterviewerList from "components/InterviewList"
+import InterviewerList from "components/InterviewerList"
 import Button from "components/Button";
 import Appointment from "components/Appointment";
 import Header from "components/Appointment/Header"
