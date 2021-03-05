@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import DayList from "components/DayList"
+import React, { useState, useEffect } from "react";
+import DayList from "components/DayList";
 import "components/Application.scss";
-import "components/Appointment"
+import "components/Appointment";
 import Appointment from "components/Appointment";
+
+import axios from 'axios'
 
 const appointments = [
   {
@@ -18,8 +20,8 @@ const appointments = [
         id: 1,
         name: "Sylvia Palmer",
         avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
+      },
+    },
   },
   {
     id: 1,
@@ -34,8 +36,8 @@ const appointments = [
         id: 1,
         name: "Sylvia Palmer",
         avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
+      },
+    },
   },
   {
     id: 2,
@@ -46,33 +48,23 @@ const appointments = [
         id: 3,
         name: "Sylvia Palmer",
         avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  }
+      },
+    },
+  },
 ];
 
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
 
 export default function Application(props) {
-  const [day, setDay]= useState("Monday")
+  const [day, setDay] = useState([]);
 
-  console.log(day)
+  useEffect(() => {
+    axios.get("/api/days").then(response => {
+      // setDay([...response])
+      console.log(response)
+    })
+  },[])
+
+  console.log(day);
 
   return (
     <main className="layout">
@@ -84,11 +76,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList
-            days={days}
-            day={day}
-            setDay={setDay}
-          />
+          <DayList day={day} setDay={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -97,15 +85,10 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {appointments.map((appointment) =>{
-          return(
-            <Appointment key={appointment.id} 
-              {...appointment}
-            >
-
-            </Appointment>
-            
-          )
+        {appointments.map((appointment) => {
+          return (
+            <Appointment key={appointment.id} {...appointment}></Appointment>
+          );
         })}
         <Appointment key="last" time="5pm" />
       </section>
